@@ -1,6 +1,9 @@
-﻿namespace SmartGarden.Services.Calculator
+﻿using SmartGarden.Models;
+
+namespace SmartGarden.Services.Calculator
 {
     public interface ICalculatorService
     {
+        SolarPanelResults CalculateEnergyProduction(SolarPanelParameters parameters);
     }
 }

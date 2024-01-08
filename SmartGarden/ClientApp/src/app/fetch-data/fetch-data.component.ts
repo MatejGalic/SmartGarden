@@ -1,23 +1,35 @@
-import { Component, Inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Component } from '@angular/core';
+import { SolarPanelParameters } from '../core/models/dtos/solarPanelParameters';
+import { SolarPanelResults } from '../core/models/dtos/solarPanelResults';
+import { CalculatorService } from '../core/services/calculator.service';
 
 @Component({
   selector: 'app-fetch-data',
-  templateUrl: './fetch-data.component.html'
+  templateUrl: './fetch-data.component.html',
 })
 export class FetchDataComponent {
-  public forecasts: WeatherForecast[] = [];
+  public results: SolarPanelResults;
 
-  constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
-    http.get<WeatherForecast[]>(baseUrl + 'weatherforecast').subscribe(result => {
-      this.forecasts = result;
-    }, error => console.error(error));
+  constructor(private calculatorSvc: CalculatorService) {
+    const parameters: SolarPanelParameters = {
+      // testing
+      year: 2023,
+      month: 5,
+      day: 15,
+      latitude: 45.5,
+      panelTilt: 35.0,
+      panelPower: 15,
+      nOCT: 47.0,
+      ambientTemperature: 15.0,
+      panelEfficiency: 11.9,
+      panelArea: 0.1575,
+      powerTemperatureCoefficient: -0.5,
+    };
+
+    this.calculatorSvc
+      .calculateSolarPanelEnergyProduction(parameters)
+      .subscribe((res) => {
+        this.results = res;
+      });
   }
-}
-
-interface WeatherForecast {
-  date: string;
-  temperatureC: number;
-  temperatureF: number;
-  summary: string;
 }

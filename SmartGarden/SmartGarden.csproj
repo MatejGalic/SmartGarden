@@ -12,6 +12,8 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.SpaProxy" Version="7.0.12" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="6.5.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -19,6 +21,18 @@
     <Content Remove="$(SpaRoot)**" />
     <None Remove="$(SpaRoot)**" />
     <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="ClientApp\src\app\core\models\dtos\solarPanelParameters.ts">
+      <CustomToolNamespace>2578a859-a59a-4c0f-b8e0-0161ad85ee6f</CustomToolNamespace>
+    </None>
+    <None Update="ClientApp\src\app\core\models\dtos\solarPanelResults.ts">
+      <CustomToolNamespace>2578a859-a59a-4c0f-b8e0-0161ad85ee6f</CustomToolNamespace>
+    </None>
+    <None Update="ClientApp\src\app\core\models\template.nt">
+      <CustomToolNamespace>2578a859-a59a-4c0f-b8e0-0161ad85ee6f</CustomToolNamespace>
+    </None>
   </ItemGroup>
 
     <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

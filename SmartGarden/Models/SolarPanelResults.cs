@@ -2,7 +2,13 @@
 {
     public class SolarPanelResults
     {
+        /// <summary>
+        /// Ukupno proizvedena energija uz podatke za smanjenje (Wh/panel/dan)
+        /// </summary>
         public double CumulativeEnergy { get; set; }
-        public double CumulativeEnergyEfikasnost { get; set; }
+        /// <summary>
+        /// Ukupno proizvedena energija uz efikasnost (Wh/panel/dan)
+        /// </summary>
+        public double CumulativeEnergyEfficiency { get; set; }
     }
 }
