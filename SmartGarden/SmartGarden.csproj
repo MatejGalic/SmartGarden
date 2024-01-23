@@ -24,10 +24,16 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="ClientApp\src\app\core\models\dtos\gardenParameters.ts">
+      <CustomToolNamespace>2578a859-a59a-4c0f-b8e0-0161ad85ee6f</CustomToolNamespace>
+    </None>
     <None Update="ClientApp\src\app\core\models\dtos\solarPanelParameters.ts">
       <CustomToolNamespace>2578a859-a59a-4c0f-b8e0-0161ad85ee6f</CustomToolNamespace>
     </None>
     <None Update="ClientApp\src\app\core\models\dtos\solarPanelResults.ts">
+      <CustomToolNamespace>2578a859-a59a-4c0f-b8e0-0161ad85ee6f</CustomToolNamespace>
+    </None>
+    <None Update="ClientApp\src\app\core\models\dtos\toggleOpeningRequest.ts">
       <CustomToolNamespace>2578a859-a59a-4c0f-b8e0-0161ad85ee6f</CustomToolNamespace>
     </None>
     <None Update="ClientApp\src\app\core\models\template.nt">

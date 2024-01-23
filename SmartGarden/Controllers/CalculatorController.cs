@@ -5,7 +5,7 @@ using SmartGarden.Services.Calculator;
 namespace SmartGarden.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class CalculatorController : ControllerBase
     {
         private readonly ICalculatorService _calculatorService;

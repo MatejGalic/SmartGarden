@@ -1,4 +1,5 @@
 using SmartGarden.Services.Calculator;
+using SmartGarden.Services.Garden;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +10,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddSingleton<ICalculatorService, CalculatorService>();
+builder.Services.AddSingleton<IGardenService, GardenService>();
 
 var app = builder.Build();
 
