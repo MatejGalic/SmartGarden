@@ -2,5 +2,5 @@
   @apply rounded-lg p-5 shadow bg-white;
 }
 .action-card {
-  @apply rounded-lg transition-colors cursor-pointer p-5 shadow bg-blue-500 text-blue-50 hover:bg-blue-400;
+  @apply rounded-lg transition-colors cursor-pointer p-5 shadow bg-blue-500 text-blue-50 hover:bg-blue-400 disabled:bg-blue-200;
 }
