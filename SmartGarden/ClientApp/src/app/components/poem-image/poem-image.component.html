@@ -1,0 +1,37 @@
+<img
+  #poemImage
+  class="rounded transition-transform"
+  [ngClass]="{ 'cursor-pointer': canOpenDetails }"
+  [src]="imagesApi + '/' + poemPart.imageId"
+  (click)="open()"
+  (load)="setDominantColor()"
+  (mouseenter)="mouseEventEnter($event)"
+  (mouseleave)="mouseEventLeave($event)"
+  (load)="imageLoadedEvent($event)"
+/>
+
+<div
+  *ngIf="opened"
+  class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center"
+  (click)="close()"
+>
+  <div class="rounded shadow-lg w-11/12 sm:w-3/5 lg:w-2/5 overflow-hidden">
+    <div
+      (click)="$event.stopPropagation()"
+      class="relative bg-white p-4 sm:p-6 max-h-[80vh] overflow-y-auto"
+    >
+      <img
+        class="rounded mb-5 mx-auto"
+        [src]="imagesApi + '/' + poemPart.imageId"
+      />
+      <p
+        class="text-xl sm:text-2xl lg:text-3xl mb-5 mx-auto w-fit max-w-prose"
+        [innerText]="poemPart.part"
+      ></p>
+
+      <button class="button-delete mx-auto" (click)="close()">
+        Zatvori prozor
+      </button>
+    </div>
+  </div>
+</div>

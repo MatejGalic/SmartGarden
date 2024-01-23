@@ -1,0 +1,6 @@
+@import "../../../scss/layout/image.scss";
+
+:host {
+  display: block;
+  @extend .poem-image;
+}

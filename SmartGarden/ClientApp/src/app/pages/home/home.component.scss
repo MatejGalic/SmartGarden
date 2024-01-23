@@ -1,0 +1,8 @@
+@import "../../../scss/layout/header.scss";
+:host {
+  @extend .header-offset;
+}
+
+a:not(:hover) {
+  background-color: white !important;
+}

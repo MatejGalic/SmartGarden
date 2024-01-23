@@ -1,0 +1,45 @@
+<header>
+  <div class="flex items-center justify-between">
+    <div class="flex h-8 w-8 items-center">
+      <a
+        *ngIf="isHomepage$ | async"
+        class="text-3xl font-bold text-gray-900"
+        [routerLink]="['/']"
+      >
+        SmartGarden
+      </a>
+      <a
+        *ngIf="!(isHomepage$ | async)"
+        (click)="goBack()"
+        class="flex cursor-pointer items-center text-gray-800 hover:text-gray-950 transition-colors gap-1 font-semibold text-base group py-1 pr-1"
+        ><fa-icon
+          [fixedWidth]="true"
+          class="group-hover:drop-shadow-md group-hover:scale-105 drop-shadow-none transition-all"
+          [icon]="['fas', 'arrow-alt-circle-left']"
+          size="xl"
+        ></fa-icon
+        >Natrag</a
+      >
+    </div>
+    <nav>
+      <div>
+        <ul class="navbar-nav flex gap-3 flex-grow">
+          <li
+            class="nav-item"
+            [routerLinkActive]="['link-active']"
+            [routerLinkActiveOptions]="{ exact: true }"
+          >
+            <a class="nav-link text-dark" [routerLink]="['/']">Početna</a>
+          </li>
+          <!-- <li
+            class="nav-item"
+            [routerLinkActive]="['link-active']"
+            [routerLinkActiveOptions]="{ exact: true }"
+          >
+            <a class="nav-link text-dark" [routerLink]="['/admin']">Administracija</a>
+          </li> -->
+        </ul>
+      </div>
+    </nav>
+  </div>
+</header>
