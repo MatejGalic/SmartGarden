@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { filter } from 'rxjs';
 import { GardenService } from 'src/app/core/services/garden.service';
 
 @Component({
@@ -7,25 +8,23 @@ import { GardenService } from 'src/app/core/services/garden.service';
   styleUrl: './garden.component.scss',
 })
 export class GardenComponent {
-  public gardenState$ = this.gardenSvc.gardenState$;
+  public gardenState$ = this.gardenSvc.gardenState$.pipe(filter((s) => !!s));
   public loadingPump: boolean = false;
   public loadingWindows: boolean = false;
 
   constructor(private gardenSvc: GardenService) {}
 
-  public togglePump(state: boolean) {
+  public openPump() {
     this.loadingPump = true;
-    this.gardenSvc.togglePump({ shouldItemOpen: !state }).subscribe((res) => {
+    this.gardenSvc.openPump().subscribe((res) => {
       this.loadingPump = false;
     });
   }
 
-  public toggleWindows(state: boolean) {
+  public openWindows() {
     this.loadingWindows = true;
-    this.gardenSvc
-      .toggleWindows({ shouldItemOpen: !state })
-      .subscribe((res) => {
-        this.loadingWindows = false;
-      });
+    this.gardenSvc.openWindows().subscribe((res) => {
+      this.loadingWindows = false;
+    });
   }
 }

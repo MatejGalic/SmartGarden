@@ -32,17 +32,20 @@ namespace SmartGarden.Controllers
             return Ok();
         }
 
-        [HttpPost("toggle-pump")]
-        public ActionResult<GardenParameters> TogglePump([FromBody] ToggleOpeningRequest state)
+        [HttpGet("open-pump")]
+        public async Task<ActionResult> OpenPump()
         {
-
-            return Ok(_gardenService.TogglePump(state));
+            var state = _gardenService.OpenPump();
+            await _hub.BroadcastGardenState(state);
+            return Ok();
         }
 
-        [HttpPost("toggle-windows")]
-        public ActionResult<GardenParameters> ToggleWindows([FromBody] ToggleOpeningRequest state)
+        [HttpGet("open-windows")]
+        public async Task<ActionResult> OpenWindows()
         {
-            return Ok(_gardenService.ToggleWindows(state));
+            var state = _gardenService.OpenWindows();
+            await _hub.BroadcastGardenState(state);
+            return Ok();
         }
     }
 }

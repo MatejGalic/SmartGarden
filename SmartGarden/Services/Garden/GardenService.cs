@@ -4,11 +4,10 @@ namespace SmartGarden.Services.Garden
 {
     public class GardenService : IGardenService
     {
-        private static GardenParameters _currentState = new() { Temperature = 0};
+        private static GardenParameters _currentState = new() { Temperature = 0 };
 
         public GardenParameters GetLatestState()
         {
-            _currentState.Temperature += 1;
             return _currentState;
         }
 
@@ -17,15 +16,15 @@ namespace SmartGarden.Services.Garden
             _currentState = state;
         }
 
-        public GardenParameters TogglePump(ToggleOpeningRequest state)
+        public GardenParameters OpenPump()
         {
-            _currentState.IsPumpOpen = state.ShouldItemOpen;
+            _currentState.IsPumpOpen = true;
             return _currentState;
         }
 
-        public GardenParameters ToggleWindows(ToggleOpeningRequest state)
+        public GardenParameters OpenWindows()
         {
-            _currentState.IsPumpOpen = state.ShouldItemOpen;
+            _currentState.IsWindowOpen = true;
             return _currentState;
         }
     }

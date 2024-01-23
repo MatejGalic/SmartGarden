@@ -4,3 +4,6 @@
 .action-card {
   @apply rounded-lg transition-colors cursor-pointer p-5 shadow bg-blue-500 text-blue-50 hover:bg-blue-400 disabled:bg-blue-200;
 }
+.no-action-card {
+  @apply rounded-lg transition-colors cursor-pointer p-5 shadow bg-fuchsia-800 text-fuchsia-50;
+}

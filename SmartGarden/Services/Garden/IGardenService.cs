@@ -6,7 +6,7 @@ namespace SmartGarden.Services.Garden
     {
         GardenParameters GetLatestState();
         void UpdateState(GardenParameters state);
-        GardenParameters TogglePump(ToggleOpeningRequest state);
-        GardenParameters ToggleWindows(ToggleOpeningRequest state);        
+        GardenParameters OpenPump();
+        GardenParameters OpenWindows();
     }
 }
