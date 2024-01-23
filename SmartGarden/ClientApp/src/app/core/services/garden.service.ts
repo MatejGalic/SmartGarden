@@ -3,6 +3,8 @@ import { Inject, Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, take, tap } from 'rxjs';
 import { GardenParameters } from '../models/dtos/gardenParameters';
 import { ToggleOpeningRequest } from '../models/dtos/toggleOpeningRequest';
+import { SignalRService } from './signal-r.service';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Injectable({
   providedIn: 'root',
@@ -12,11 +14,22 @@ export class GardenService {
   private _gardenState = new BehaviorSubject<GardenParameters>(null);
   public gardenState$ = this._gardenState.asObservable();
 
-  constructor(private http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
-    this.apiUrl = `${baseUrl}garden`;
+  constructor(
+    private http: HttpClient,
+    @Inject('BASE_URL') baseUrl: string,
+    private signalRService: SignalRService
+  ) {
+    this.apiUrl = `${baseUrl}api/garden`;
     this.getLatestState().subscribe((state) => {
       this._gardenState.next(state);
     });
+
+    this.signalRService.gardenState$
+      .pipe(takeUntilDestroyed())
+      .subscribe((state) => {
+        this._gardenState.next(state);
+      });
+    this.signalRService.subscribeToGardenState();
   }
 
   public getLatestState(): Observable<GardenParameters> {

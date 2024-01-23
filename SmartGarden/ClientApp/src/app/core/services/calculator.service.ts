@@ -11,7 +11,7 @@ export class CalculatorService {
   private readonly apiUrl;
 
   constructor(private http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
-    this.apiUrl = `${baseUrl}calculator`;
+    this.apiUrl = `${baseUrl}api/calculator`;
   }
 
   public calculateSolarPanelEnergyProduction(

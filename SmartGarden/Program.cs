@@ -1,16 +1,18 @@
+using SmartGarden.Hubs;
 using SmartGarden.Services.Calculator;
 using SmartGarden.Services.Garden;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
+builder.Services.AddSignalR();
 builder.Services.AddControllersWithViews();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddSingleton<ICalculatorService, CalculatorService>();
 builder.Services.AddSingleton<IGardenService, GardenService>();
+builder.Services.AddSingleton<GardenHub>();
 
 var app = builder.Build();
 
@@ -30,6 +32,7 @@ else
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
+app.MapHub<GardenHub>("hub");
 
 
 app.MapControllerRoute(

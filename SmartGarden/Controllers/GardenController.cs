@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SmartGarden.Hubs;
 using SmartGarden.Models;
 using SmartGarden.Services.Garden;
 
@@ -9,10 +10,12 @@ namespace SmartGarden.Controllers
     public class GardenController : ControllerBase
     {
         private readonly IGardenService _gardenService;
+        private readonly GardenHub _hub;
 
-        public GardenController(IGardenService gardenService)
+        public GardenController(IGardenService gardenService, GardenHub hub)
         {
             _gardenService = gardenService;
+            _hub = hub;
         }
 
         [HttpGet]
@@ -22,9 +25,10 @@ namespace SmartGarden.Controllers
         }
 
         [HttpPut]
-        public ActionResult UpdateGardenState([FromBody] GardenParameters state)
+        public async Task<ActionResult> UpdateGardenState([FromBody] GardenParameters state)
         {
             _gardenService.UpdateState(state);
+            await _hub.BroadcastGardenState(state);
             return Ok();
         }
 
