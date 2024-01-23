@@ -1,7 +1,10 @@
 <header>
   <div class="flex items-center justify-between">
     <div class="flex h-8 w-8 items-center">
-      <a
+      <a class="text-2xl font-bold text-gray-900" [routerLink]="['/']">
+        SmartGarden
+      </a>
+      <!-- <a
         *ngIf="isHomepage$ | async"
         class="text-3xl font-bold text-gray-900"
         [routerLink]="['/']"
@@ -15,11 +18,10 @@
         ><fa-icon
           [fixedWidth]="true"
           class="group-hover:drop-shadow-md group-hover:scale-105 drop-shadow-none transition-all"
-          [icon]="['fas', 'arrow-alt-circle-left']"
-          size="xl"
+          [icon]="['fas', 'arrow-left']"
+          size="lg"
         ></fa-icon
-        >Natrag</a
-      >
+      ></a> -->
     </div>
     <nav>
       <div>
@@ -31,13 +33,13 @@
           >
             <a class="nav-link text-dark" [routerLink]="['/']">Početna</a>
           </li>
-          <!-- <li
+          <li
             class="nav-item"
             [routerLinkActive]="['link-active']"
             [routerLinkActiveOptions]="{ exact: true }"
           >
-            <a class="nav-link text-dark" [routerLink]="['/admin']">Administracija</a>
-          </li> -->
+            <a class="nav-link text-dark" [routerLink]="['/garden']">Vrt</a>
+          </li>
         </ul>
       </div>
     </nav>

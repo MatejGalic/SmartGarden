@@ -3,3 +3,7 @@
 @import "tailwindcss/utilities";
 
 @import "scss/framework";
+
+body {
+  @apply font-sans text-neutral-900 bg-slate-50;
+}
