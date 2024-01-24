@@ -24,6 +24,7 @@ namespace SmartGarden.Controllers
             return Ok(_gardenService.GetLatestState());
         }
 
+        // mainly used for debugging SignalR from Swagger
         [HttpPut]
         public async Task<ActionResult> UpdateGardenState([FromBody] GardenParameters state)
         {
@@ -33,18 +34,16 @@ namespace SmartGarden.Controllers
         }
 
         [HttpGet("open-pump")]
-        public async Task<ActionResult> OpenPump()
+        public ActionResult OpenPump()
         {
-            var state = _gardenService.OpenPump();
-            await _hub.BroadcastGardenState(state);
+            _gardenService.OpenPump();
             return Ok();
         }
 
         [HttpGet("open-windows")]
-        public async Task<ActionResult> OpenWindows()
+        public ActionResult OpenWindows()
         {
-            var state = _gardenService.OpenWindows();
-            await _hub.BroadcastGardenState(state);
+            _gardenService.OpenWindows();
             return Ok();
         }
     }
