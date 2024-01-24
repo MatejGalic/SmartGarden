@@ -17,7 +17,7 @@ namespace SmartGarden.Hubs
             // Broadcast the message to all connected clients
             await _hubContext.Clients.All.SendAsync("GardenParameters", message);
         }
-        
+
         public async Task BroadcastGardenImage(object message) // TODO: definirati koja je slika formata
         {
             // Broadcast the image to all connected clients

@@ -4,7 +4,7 @@ namespace SmartGarden.Services.Garden
 {
     public class GardenService : IGardenService
     {
-        private static GardenParameters _currentState = new() { Temperature = 0 };
+        private static GardenParameters _currentState = new();
 
         public GardenParameters GetLatestState()
         {
