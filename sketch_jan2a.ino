@@ -175,23 +175,25 @@ void readSoilMoistureSensor() {
 //Publish readings to mqtt broker
 void sendReadingsMqtt() {
   if(currentMilis - previousReadingsSent >= sendReadingsInterval){
-    
-    JsonDocument doc;
-    doc["humidity"] = humidity;
-    doc["temperature"] = temperature;
-    doc["moisture"] = moisture;
-    doc["pump"] = openPumpFlag ? "open" : "closed";
-    doc["window"] = openWindowFlag ? "open" : "closed";
-    doc["user"] = userName;
-    String json;
-    serializeJson(doc, json);
-
-    mqttClient.beginMessage(publishTopic);
-    mqttClient.print(json);
-    mqttClient.endMessage();
-
+    sendReading();
     previousReadingsSent += sendReadingsInterval;
   }
+}
+
+void sendReading() {
+  JsonDocument doc;
+  doc["humidity"] = humidity;
+  doc["temperature"] = temperature;
+  doc["moisture"] = moisture;
+  doc["pump"] = openPumpFlag ? "open" : "closed";
+  doc["window"] = openWindowFlag ? "open" : "closed";
+  doc["user"] = userName;
+  String json;
+  serializeJson(doc, json);
+
+  mqttClient.beginMessage(publishTopic);
+  mqttClient.print(json);
+  mqttClient.endMessage();
 }
 
 //Open pump and set appropriate flag and timing
@@ -252,6 +254,9 @@ void pumpControl() {
   //Or if pump control is manual and pump should turn on
   } else if((lowSoilMoistureFlag && !manualPumpControl && !pumpCooldownFlag) || (manualPumpControl && manualPumpTurnOn)) {
     turnOnPump();
+  } else if(manualPumpControl && manualPumpTurnOn) {
+    turnOnPump();
+    sendReading();
   }
 }
 
@@ -277,7 +282,6 @@ void onMqttMessage(int messageSize) {
     Serial.println(error.c_str());
   } else {
     JsonObject root = doc.as<JsonObject>();
-
     String targetUser = root["user"];
     if(targetUser && targetUser == userName) {
       if(root.containsKey("turnOnManual")) {
