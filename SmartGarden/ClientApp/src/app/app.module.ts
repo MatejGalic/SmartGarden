@@ -24,8 +24,7 @@ import { GardenComponent } from './pages/garden/garden.component';
     ReactiveFormsModule,
     FontAwesomeModule,
     RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'garden', component: GardenComponent, pathMatch: 'full' },
+      { path: '', component: GardenComponent, pathMatch: 'full' },
     ]),
   ],
   providers: [],

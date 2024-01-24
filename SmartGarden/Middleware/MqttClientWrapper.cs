@@ -14,13 +14,12 @@ public class MqttClientWrapper : IMqttClientWrapper
 
     private readonly MqttClient mqttClient;
     private readonly GardenHub _hub;
-    private GardenParameters _gardenParameters;
+    private static GardenParameters _gardenParameters = new();
 
 
     public MqttClientWrapper(GardenHub hub)
     {
         mqttClient = new MqttClient(Url, Port, false, null, null, MqttSslProtocols.None);
-        _gardenParameters = new();
         _hub = hub;
     }
 
